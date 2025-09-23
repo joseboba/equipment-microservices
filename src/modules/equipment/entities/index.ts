@@ -44,8 +44,8 @@ export class EquipmentLocation {
 	@Column({ name: 'name', type: 'varchar', length: 50 })
 	name: string;
 
-	@Column({ name: 'assigned_user', type: 'integer' })
-	assignedUser: number;
+	@Column({ name: 'assigned_user', type: 'integer', nullable: true })
+	assignedUser?: number;
 
 	@Column({ name: 'is_high_school', type: 'boolean' })
 	isHighSchool: boolean;

@@ -81,4 +81,12 @@
 			{ userId },
 		);
 	}
+
+	public static UserNoUserTechnical(userId: number) {
+		return new BusinessError(
+			'USER.NoUserTechnical',
+			'User is not technical',
+			{ userId },
+		);
+	}
 }

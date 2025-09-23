@@ -158,9 +158,9 @@ export class CreateEquipmentLocationDto {
 	@IsNotEmpty()
 	name: string;
 
-	@ApiProperty({ example: 3, description: 'ID del usuario asignado' })
-	@IsNotEmpty()
-	assignedUser: number;
+	@ApiPropertyOptional({ example: 3, description: 'ID del usuario asignado' })
+	@IsOptional()
+	assignedUser?: number;
 
 	@ApiProperty({ example: true, description: '¿Es de secundaria?' })
 	@IsBoolean()

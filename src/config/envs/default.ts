@@ -1,10 +1,18 @@
 
 // Custom file imports
-import { EquipmentType, EquipmentLocation, Equipment } from "@entities";
+import {
+  Equipment,
+  EquipmentLocation,
+  EquipmentType,
+} from '../../modules/equipment/entities';
 
-export const config = {
+export default {
   db: {
-  entities: [EquipmentType, EquipmentLocation, Equipment],
+    entities: [
+      Equipment,
+      EquipmentLocation,
+      EquipmentType,
+    ],
     type: 'postgres',
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -12,5 +20,18 @@ export const config = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     schema: process.env.DB_SCHEMA,
+    jwt: {
+      secret: process.env.JWT_SECRET,
+      refreshSecret: process.env.JWT_REFRESH_SECRET,
+      expiresIn: process.env.JWT_EXPIRES_IN,
+      refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
+      audience: process.env.JWT_AUDIENCE,
+    },
+  },
+  user: {
+    getUserAppByUserAppId: {
+      baseUrl: 'http://localhost:3000',
+      resourcePath: 'api/user', // El endpoint devuelve todos los usuarios, filtramos por userAppId en el adaptador
+    },
   },
 };

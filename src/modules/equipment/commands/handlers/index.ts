@@ -1,4 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Equipment, EquipmentLocation, EquipmentType } from '../../entities';
@@ -59,15 +61,26 @@ export class CreateEquipmentLocationHandler implements ICommandHandler<CreateEqu
 		@InjectRepository(EquipmentLocation)
 		private readonly repo: Repository<EquipmentLocation>,
 		private readonly httpService: HttpService,
+	@Inject(ConfigService)
+	private readonly configService: ConfigService,
 	) {}
 
 	async execute(command: CreateEquipmentLocationCommand): Promise<EquipmentLocation> {
-		// Validar usuario (ajusta la URL según tu microservicio de usuarios)
-		const userExists = await this.httpService.get(`http://USUARIOS-SERVICE/api/users/${command.dto.assignedUser}`)
-			.toPromise()
-			.then(() => true)
-			.catch(() => false);
-		if (!userExists) throw BusinessErrors.UserNotFound(command.dto.assignedUser);
+
+		// Validar usuario solo si assignedUser está presente
+		if (command.dto.assignedUser !== undefined && command.dto.assignedUser !== null) {
+			// Usar el adaptador para obtener el usuario
+			const userAdapter = new (require('../../../../infrastructure/microservices-adapters/get-user-app-by-id-adapter.service')).GetUserAppByIdAdapterService(
+				this.configService,
+				this.httpService
+			);
+			let userApp: any;
+			const result = await userAdapter.execute(command.dto.assignedUser);
+			if (result && typeof result === 'object' && 'error' in result) {
+				if (result.error === 'USER.NoUserTechnical') throw BusinessErrors.UserNoUserTechnical(command.dto.assignedUser);
+				if (result.error === 'USER.NotFound') throw BusinessErrors.UserNotFound(command.dto.assignedUser);
+			}
+		}
 
 		const exists = await this.repo.findOneBy({ name: command.dto.name });
 		if (exists) throw BusinessErrors.EquipmentLocationNameAlreadyExists(command.dto.name);

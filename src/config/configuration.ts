@@ -24,8 +24,8 @@ export const util = {
 };
 
 export const configuration = async (): Promise<Config> => {
-  const { config } = <{ config: Default }>(
-    await import(`${__dirname}/envs/default`)
+  const config = <Default>(
+    (await import(`${__dirname}/envs/default`)).default
   );
   const { config: environment } = <{ config: Production }>(
     await import(`${__dirname}/envs/${process.env.NODE_ENV || 'development'}`)

@@ -1,5 +1,5 @@
 // Custom file imports
-import type { config as base } from './envs/default';
+import type base from './envs/default';
 import type { config as production } from './envs/prod';
 
 export type Objectype = Record<string, unknown>;
