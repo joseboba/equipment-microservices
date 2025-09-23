@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { configureMicroservice } from 'incident-management-commons/dist/bootstrapping';
 import { ConfigService } from '@nestjs/config';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,8 +11,9 @@ async function bootstrap() {
     title: 'User Microservices',
     description: 'API for user microservices',
     version: '1.0',
-    basePath: 'api/user',
+    basePath: 'api/equipment',
   });
+
 
   const configService = app.select(AppModule).get(ConfigService);
   const port = configService.get<number>('PORT') || 3000;

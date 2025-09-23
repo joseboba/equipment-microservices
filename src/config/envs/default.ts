@@ -1,8 +1,10 @@
+
 // Custom file imports
+import { EquipmentType, EquipmentLocation, Equipment } from "@entities";
 
 export const config = {
   db: {
-    entities: [],
+  entities: [EquipmentType, EquipmentLocation, Equipment],
     type: 'postgres',
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,

@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EquipmentController } from './controller/equipment.controller';
 import { CommandHandlers } from './commands/handlers';
 import { QueryHandlers } from './queries/handler';
+import { EquipmentType, EquipmentLocation, Equipment } from './entities';
 
 @Module({
-  imports: [CqrsModule, HttpModule, TypeOrmModule.forFeature([])],
+  imports: [CqrsModule, HttpModule, TypeOrmModule.forFeature([EquipmentType, EquipmentLocation, Equipment])],
   controllers: [EquipmentController],
   providers: [...CommandHandlers, ...QueryHandlers],
 })
