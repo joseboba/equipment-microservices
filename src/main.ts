@@ -2,18 +2,16 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { configureMicroservice } from 'incident-management-commons/dist/bootstrapping';
 import { ConfigService } from '@nestjs/config';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   configureMicroservice(app, {
-    title: 'User Microservices',
-    description: 'API for user microservices',
+    title: 'Equipment Microservices',
+    description: 'API for equipment microservices',
     version: '1.0',
     basePath: 'api/equipment',
   });
-
 
   const configService = app.select(AppModule).get(ConfigService);
   const port = configService.get<number>('PORT') || 3000;
