@@ -19,16 +19,19 @@ export class UpdateEquipmentLocationHandler
   async execute(
     command: UpdateEquipmentLocationCommand,
   ): Promise<EquipmentLocation> {
-    const userAppResult = await this._getUserAppByIdAdapter.execute(
-      command.dto.assignedUser,
-    );
-    if (!userAppResult.isActive) {
-      throw BusinessErrors.UserIsNotActive(userAppResult.userAppId);
+    if (command.dto.assignedUser !== undefined) {
+      const userAppResult = await this._getUserAppByIdAdapter.execute(
+        command.dto.assignedUser,
+      );
+      if (!userAppResult.isActive) {
+        throw BusinessErrors.UserIsNotActive(userAppResult.userAppId);
+      }
+
+      if (!userAppResult.userType.isTechnical) {
+        throw BusinessErrors.UserNoUserTechnical(userAppResult.userAppId);
+      }
     }
 
-    if (!userAppResult.userType.isTechnical) {
-      throw BusinessErrors.UserNoUserTechnical(userAppResult.userAppId);
-    }
 
     const entity = await this.repo.findOneBy({
       equipmentLocationId: command.equipmentLocationId,

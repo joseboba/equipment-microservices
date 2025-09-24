@@ -33,16 +33,16 @@ export class CreateEquipmentLocationHandler
       if (!userAppResult.userType.isTechnical) {
         throw BusinessErrors.UserNoUserTechnical(userAppResult.userAppId);
       }
-
-      const exists = await this.repo.findOneBy({ name: command.dto.name });
-      if (exists) {
-        throw BusinessErrors.EquipmentLocationNameAlreadyExists(
-          command.dto.name,
-        );
-      }
-
-      const entity = this.repo.create(command.dto);
-      return this.repo.save(entity);
     }
+
+    const exists = await this.repo.findOneBy({ name: command.dto.name });
+    if (exists) {
+      throw BusinessErrors.EquipmentLocationNameAlreadyExists(
+        command.dto.name,
+      );
+    }
+
+    const entity = this.repo.create(command.dto);
+    return this.repo.save(entity);
   }
 }
