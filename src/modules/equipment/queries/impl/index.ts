@@ -1,18 +1,6 @@
-export class GetEquipmentLocationsByAssignedUserQuery {
-	constructor(public readonly assignedUser: number) {}
-}
-export class GetAllEquipmentQuery {}
-
-export class GetEquipmentByIdQuery {
-	constructor(public readonly equipmentId: number) {}
-}
-export class GetAllEquipmentLocationsQuery {}
-
-export class GetEquipmentLocationByIdQuery {
-	constructor(public readonly equipmentLocationId: number) {}
-}
-export class GetAllEquipmentTypesQuery {}
-
-export class GetEquipmentTypeByIdQuery {
-	constructor(public readonly equipmentTypeCode: string) {}
-}
+export * from './get-all-equipment.query';
+export * from './get-all-equipment-location.query';
+export * from './get-all-equipment-types.query';
+export * from './get-equipment-by-id.query';
+export * from './get-equipment-location-by-id.query';
+export * from './get-equipment-type-by-id.query';

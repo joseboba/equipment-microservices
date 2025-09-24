@@ -1,0 +1,1 @@
+export * from './get-user-app-by-id-adapter.service';
