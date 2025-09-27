@@ -19,17 +19,13 @@ import {
 
 @Controller()
 export class EquipmentController {
-  /**
-   * Consulta equipos por usuario asignado (assignedUser en equipment_location)
-   */
+
   @Get('equipment/by-user/:userId')
   async getEquipmentByUser(@Param('userId') userId: number) {
-    // Buscar ubicaciones donde assignedUser = userId
-    // Luego buscar equipos en esas ubicaciones
+
     const locations = await this._queryBus.execute(new GetEquipmentLocationsByAssignedUserQuery(Number(userId)));
     if (!locations || locations.length === 0) return [];
     const locationIds = locations.map((loc: any) => loc.equipmentLocationId);
-    // Buscar equipos en esas ubicaciones
     const allEquipment = await this._queryBus.execute(new GetAllEquipmentQuery());
     return allEquipment.filter((eq: any) => locationIds.includes(eq.equipmentLocationId));
   }
