@@ -6,11 +6,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EquipmentController } from './controller/equipment.controller';
 import { CommandHandlers } from './commands/handlers';
 import { QueryHandlers } from './queries/handler';
-import { EquipmentType, EquipmentLocation, Equipment } from './entities';
+import { EquipmentType, EquipmentLocation, Equipment } from '@entities';
+import { GetUserAppByIdAdapterService } from '../../infrastructure/microservices-adapters';
 
 @Module({
-  imports: [CqrsModule, HttpModule, ConfigModule, TypeOrmModule.forFeature([EquipmentType, EquipmentLocation, Equipment])],
+  imports: [
+    CqrsModule,
+    HttpModule,
+    ConfigModule,
+    TypeOrmModule.forFeature([EquipmentType, EquipmentLocation, Equipment]),
+  ],
   controllers: [EquipmentController],
-  providers: [...CommandHandlers, ...QueryHandlers],
+  providers: [...CommandHandlers, ...QueryHandlers, GetUserAppByIdAdapterService],
 })
 export class EquipmentModule {}

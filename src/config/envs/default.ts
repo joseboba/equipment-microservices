@@ -31,7 +31,7 @@ export default {
   user: {
     getUserAppByUserAppId: {
       baseUrl: 'http://localhost:3000',
-      resourcePath: 'api/user', // El endpoint devuelve todos los usuarios, filtramos por userAppId en el adaptador
+      resourcePath: 'api/user',
     },
   },
 };

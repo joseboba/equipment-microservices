@@ -1,92 +1,84 @@
-	import { BusinessError } from 'incident-management-commons';
+import { BusinessError } from 'incident-management-commons';
 
-	export class BusinessErrors {
-		// EquipmentLocation errors
-	// Equipment errors
-	public static EquipmentNotFound(equipmentId: number) {
-		return new BusinessError(
-			'EQUIPMENT.NotFound',
-			'Equipment not found',
-			{ equipmentId },
-		);
-	}
+export class BusinessErrors {
+  public static EquipmentNotFound(equipmentId: number) {
+    return new BusinessError('EQUIPMENT.NotFound', 'Equipment not found', {
+      equipmentId,
+    });
+  }
 
-	public static EquipmentSerialNumberAlreadyExists(serialNumber: string) {
-		return new BusinessError(
-			'EQUIPMENT.SerialNumberAlreadyExists',
-			'Equipment serial number already exists',
-			{ serialNumber },
-		);
-	}
+  public static EquipmentSerialNumberAlreadyExists(serialNumber: string) {
+    return new BusinessError(
+      'EQUIPMENT.SerialNumberAlreadyExists',
+      'Equipment serial number already exists',
+      { serialNumber },
+    );
+  }
 
-	public static EquipmentIsInactive(equipmentId: number) {
-		return new BusinessError(
-			'EQUIPMENT.IsInactive',
-			'Equipment is inactive',
-			{ equipmentId },
-		);
-	}
-	public static EquipmentTypeCodeAlreadyExists(equipmentTypeCode: string) {
-		return new BusinessError(
-			'EQUIPMENT_TYPE.CodeAlreadyExists',
-			'Equipment type code already exists',
-			{ equipmentTypeCode },
-		);
-	}
+  public static EquipmentIsInactive(equipmentId: number) {
+    return new BusinessError('EQUIPMENT.IsInactive', 'Equipment is inactive', {
+      equipmentId,
+    });
+  }
+  public static EquipmentTypeCodeAlreadyExists(equipmentTypeCode: string) {
+    return new BusinessError(
+      'EQUIPMENT.CodeAlreadyExists',
+      'Equipment type code already exists',
+      { equipmentTypeCode },
+    );
+  }
 
-	public static EquipmentTypeNotFound(equipmentTypeCode: string) {
-		return new BusinessError(
-			'EQUIPMENT_TYPE.NotFound',
-			'Equipment type not found',
-			{ equipmentTypeCode },
-		);
-	}
+  public static EquipmentTypeNotFound(equipmentTypeCode: string) {
+    return new BusinessError('EQUIPMENT.NotFound', 'Equipment type not found', {
+      equipmentTypeCode,
+    });
+  }
 
-	public static EquipmentTypeIsInactive(equipmentTypeCode: string) {
-		return new BusinessError(
-			'EQUIPMENT_TYPE.IsInactive',
-			'Equipment type is inactive',
-			{ equipmentTypeCode },
-		);
-	}
-	// EquipmentLocation errors
-	public static EquipmentLocationNotFound(equipmentLocationId: number) {
-		return new BusinessError(
-			'EQUIPMENT_LOCATION.NotFound',
-			'Equipment location not found',
-			{ equipmentLocationId },
-		);
-	}
+  public static EquipmentTypeIsInactive(equipmentTypeCode: string) {
+    return new BusinessError(
+      'EQUIPMENT.IsInactive',
+      'Equipment type is inactive',
+      { equipmentTypeCode },
+    );
+  }
 
-	public static EquipmentLocationNameAlreadyExists(name: string) {
-		return new BusinessError(
-			'EQUIPMENT_LOCATION.NameAlreadyExists',
-			'Equipment location name already exists',
-			{ name },
-		);
-	}
+  public static EquipmentLocationNotFound(equipmentLocationId: number) {
+    return new BusinessError(
+      'EQUIPMENT.NotFound',
+      'Equipment location not found',
+      { equipmentLocationId },
+    );
+  }
 
-	public static EquipmentLocationIsInactive(equipmentLocationId: number) {
-		return new BusinessError(
-			'EQUIPMENT_LOCATION.IsInactive',
-			'Equipment location is inactive',
-			{ equipmentLocationId },
-		);
-	}
-	// User errors
-	public static UserNotFound(userId: number) {
-		return new BusinessError(
-			'USER.NotFound',
-			'User not found',
-			{ userId },
-		);
-	}
+  public static EquipmentLocationNameAlreadyExists(name: string) {
+    return new BusinessError(
+      'EQUIPMENT.NameAlreadyExists',
+      'Equipment location name already exists',
+      { name },
+    );
+  }
 
-	public static UserNoUserTechnical(userId: number) {
-		return new BusinessError(
-			'USER.NoUserTechnical',
-			'User is not technical',
-			{ userId },
-		);
-	}
+  public static EquipmentLocationIsInactive(equipmentLocationId: number) {
+    return new BusinessError(
+      'EQUIPMENT.IsInactive',
+      'Equipment location is inactive',
+      { equipmentLocationId },
+    );
+  }
+
+  public static UserIsNotActive(userId: number) {
+    return new BusinessError('EQUIPMENT.UserIsNotActive', 'User not found', {
+      userId,
+    });
+  }
+
+  public static UserNoUserTechnical(userId: number) {
+    return new BusinessError(
+      'EQUIPMENT.NoUserTechnical',
+      'User is not technical',
+      {
+        userId,
+      },
+    );
+  }
 }
